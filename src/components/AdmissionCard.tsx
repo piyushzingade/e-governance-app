@@ -11,45 +11,48 @@ const ApplicationCard = ({
   onPayFee: () => void;
 }) => {
   return (
-    <div className="text-white font-bold shadow-md rounded-lg p-6 flex gap-6 items-center h-56">
+    <div className="bg-white text-black border-2 border-gray-300 font-bold shadow-lg rounded-lg p-6 flex gap-6 items-start">
       <img
-        src={"https://avatar.iran.liara.run/public/boy?username=${user}"}
+        src={`https://avatar.iran.liara.run/public/boy?username=${application.user}`}
         alt="Student"
         className="w-32 h-32 rounded-full object-cover border-4 border-gray-700"
       />
-      <div>
-        <h2 className="text-xl text-black font-medium mb-2">
+      <div className="flex flex-col justify-between flex-grow">
+        <h2 className="text-2xl text-black font-semibold mb-2">
           {application.name || "N/A"}
         </h2>
-        <p className="text-gray-300 mb-1">
+        <p className="text-gray-600 mb-1">
           Email: {application.email || "N/A"}
         </p>
-        <p className="text-gray-300 mb-1">
+        <p className="text-gray-600 mb-1">
           Phone: {application.phone || "N/A"}
         </p>
-        <p className="text-gray-300 mb-1">DOB: {application.dob || "N/A"}</p>
-        <p className="text-gray-300 mb-1">
+        <p className="text-gray-600 mb-1">DOB: {application.dob || "N/A"}</p>
+        <p className="text-gray-600 mb-1">
           Gender: {application.gender || "N/A"}
         </p>
-        <p className="text-gray-300 mb-1">
+        <p className="text-gray-600 mb-1">
           Course: {application.course || "N/A"}
         </p>
         {application.admitted && (
-          <p className="text-gray-300 mb-1">Roll no: {application.rollNo}</p>
+          <p className="text-black mb-1">Roll no: {application.rollNo}</p>
         )}
         {!application.admitted && (
-          <p className="text-gray-600">Student not admitted yet</p>
+          <p className="text-red-500">Student not admitted yet</p>
         )}
       </div>
 
       {application.accepted && !application.admitted && (
-        <div className="flex justify-center border-4 border-white p-4 rounded-lg mt-4 w-24 shadow-md">
-          <button onClick={onPayFee}>Pay Fee</button>
+        <div className="flex justify-center items-center border-2 border-blue-500 p-4 rounded-lg mt-4 w-28 bg-blue-500 hover:bg-blue-600 transition duration-300">
+          <button onClick={onPayFee} className="text-white font-semibold">
+            Pay Fee
+          </button>
         </div>
       )}
     </div>
   );
 };
+
 
 const YourApplicationPage = () => {
   const [application, setApplication] = useState<any>(null);
@@ -111,7 +114,7 @@ const YourApplicationPage = () => {
 
   return (
     <div className="h-96 text-white py-10 px-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto p-">
         <ApplicationCard application={application} onPayFee={handlePayFee} />
       </div>
     </div>

@@ -25,9 +25,11 @@ const StudentCard: React.FC<StudentCardProps> = ({ student, onClick }) => {
       className="bg-white p-4 border border-black m-3 rounded-lg shadow-md hover:shadow-lg cursor-pointer"
       onClick={() => onClick(student)}
     >
-      <h2 className="text-xl font-semibold text-black mb-2 capitalize">{student.name}</h2>
+      <h2 className="text-xl font-semibold text-black mb-2 capitalize">
+        {student.name}
+      </h2>
       <div className="text-black">
-        <p >Email : {student.email}</p>
+        <p>Email : {student.email}</p>
         <p>Phone : {student.phone}</p>
         <p>DOB : {new Date(student.dob).toLocaleDateString()}</p>
         <p>Gender : {student.gender}</p>
@@ -35,10 +37,8 @@ const StudentCard: React.FC<StudentCardProps> = ({ student, onClick }) => {
         <p></p>
         <p></p>
       </div>
-      
     </div>
   );
 };
 
 export default StudentCard;
- 

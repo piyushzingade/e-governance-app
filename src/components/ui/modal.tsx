@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "./button";
-import { X } from "lucide-react"; 
+import { X } from "lucide-react";
 import toast from "react-hot-toast";
 import { Input } from "./input";
 import { useRouter } from "next/navigation";
@@ -14,53 +14,76 @@ import { error } from "console";
 // }
 
 interface ModalProps {
-  isOpen : boolean;
-  onClose : () => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", dob: "", gender: "", course: "", marksheet: null as File | null,
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    dob: "",
+    gender: "",
+    course: "",
+    marksheet: null as File | null,
   });
 
-  const isFormIncomplete = !formData.name || !formData.email || !formData.phone || !formData.dob || !formData.gender || !formData.course || !formData.marksheet;
+  const isFormIncomplete =
+    !formData.name ||
+    !formData.email ||
+    !formData.phone ||
+    !formData.dob ||
+    !formData.gender ||
+    !formData.course ||
+    !formData.marksheet;
 
-  const [errors, setErrors] = useState({ name: "", email: "", phone: "", dob: "",  gender: "", course: "", marksheet: "", });
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    dob: "",
+    gender: "",
+    course: "",
+    marksheet: "",
+  });
   const router = useRouter();
 
-
-
-  const handleInputChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { id , value } = e.target;
-    setFormData({...formData , [id] : value});
-    setErrors({...errors , [id] : ""})
-  }
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+    setErrors({ ...errors, [id]: "" });
+  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
 
     if (file) {
       const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
-      
-      if(!allowedTypes.includes(file.type)){
-        setErrors({
-          ...errors ,
-          marksheet : "Only JPEG, PNG, and JPG files are allowed."
 
+      if (!allowedTypes.includes(file.type)) {
+        setErrors({
+          ...errors,
+          marksheet: "Only JPEG, PNG, and JPG files are allowed.",
         });
-        setFormData({...formData , marksheet : null});
+        setFormData({ ...formData, marksheet: null });
         return;
       }
 
-      if(file.size > 10 *1024 *1024) {
-        setErrors({...errors , marksheet : "file size should not exceed than 10 mb."});
-        setFormData({...formData , marksheet : null});
+      if (file.size > 10 * 1024 * 1024) {
+        setErrors({
+          ...errors,
+          marksheet: "file size should not exceed than 10 mb.",
+        });
+        setFormData({ ...formData, marksheet: null });
         return;
       }
     }
 
-    
-    setFormData({...formData , marksheet : file});
-    setErrors({...errors , marksheet : ""})
+    setFormData({ ...formData, marksheet: file });
+    setErrors({ ...errors, marksheet: "" });
   };
 
   // const validateForm = () => {
@@ -102,15 +125,15 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
           email: email,
           phone: phone,
           dob: dob,
-          gender: gender.toUpperCase(),
+          gender: gender,
           course: course,
         }),
       });
 
-      const data =  await response.json();
+      const data = await response.json();
 
-      if ( !response.ok ) {
-         toast.error(data.error || "Failed to submit the form.");
+      if (!response.ok) {
+        toast.error(data.error || "Failed to submit the form.");
         return;
       }
 
@@ -242,9 +265,9 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               onChange={handleInputChange}
             >
               <option value="">Select your gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
+              <option value="OTHER">Other</option>
             </select>
             {errors.gender && (
               <p className="text-xs text-red-500 mt-1">{errors.gender}</p>
@@ -268,14 +291,11 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
               onChange={handleInputChange}
             >
               <option value="">Select your Course</option>
-              <option value="Information Technology">
-                Information Technology
-              </option>
-              <option value="Computer Science">Computer Science</option>
-              <option value="Data Science">Data Science</option>
+              <option value="IT">Information Technology</option>
+              <option value="CS">Computer Science</option>
+              <option value="DS">Data Science</option>
             </select>
           </div>
-          
 
           {/* Upload Marksheet */}
           <div className="mb-3">
@@ -311,5 +331,4 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       </div>
     </div>
   );
-
 };

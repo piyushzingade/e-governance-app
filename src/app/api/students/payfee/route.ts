@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import Student from "@/models/Student_Registration"; // Adjust the path to your Mongoose model
-import { connectToDB } from "@/db/mongo"; // Utility to connect to your MongoDB database
+import Student from "@/models/Student_Registration";
+import { connectToDB } from "@/db/mongo";
 
 export async function POST(req: Request) {
   try {
