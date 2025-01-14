@@ -113,19 +113,19 @@ const AdminHome: React.FC = () => {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-white p-4 rounded shadow">
+        <div className="bg-white p-4 rounded border border-gray-700 shadow">
           <h2 className="font-semibold text-lg text-black">
             Total Applications
           </h2>
           <p className="text-2xl font-semibold text-blue-600">24</p>
           <p className="text-gray-800">+3 from yesterday</p>
         </div>
-        <div className="bg-white p-4 rounded shadow">
+        <div className="bg-white p-4 rounded shadow border border-gray-700 ">
           <h2 className="font-semibold text-lg text-black">Pending Review</h2>
           <p className="text-2xl font-semibold text-yellow-600">12</p>
           <p className="text-gray-800">Requires attention</p>
         </div>
-        <div className="bg-white p-4 rounded shadow">
+        <div className="bg-white p-4 rounded shadow border border-gray-700 ">
           <h2 className="font-semibold text-lg text-black">Processed Today</h2>
           <p className="text-2xl text-green-600">8</p>
           <p className="text-gray-800">Applications completed</p>
