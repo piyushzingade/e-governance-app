@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-// Ensure StudentCard component supports action buttons
 import { StudentModal } from "./StudentModal";
 import toast from "react-hot-toast";
-import StudentCard from "./StudentCard";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+
 interface Student {
   _id: string;
   userId: string;
@@ -16,7 +15,6 @@ interface Student {
   dob: string;
   gender: string;
   course: string;
-  rollNo?: string;
   admitted?: boolean;
   accepted?: boolean;
 }
@@ -27,6 +25,7 @@ const AdminHome: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showAllApplications, setShowAllApplications] = useState(false);
 
   // Fetch students on mount
   useEffect(() => {
@@ -35,12 +34,10 @@ const AdminHome: React.FC = () => {
         const response = await fetch(
           "http://localhost:3000/api/admin/studentForms"
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch students");
-        }
+        if (!response.ok) throw new Error("Failed to fetch students");
+
         const data = await response.json();
-        console.log("Data received:", data);
-        setStudents(data.students); // Set students from the API response
+        setStudents(data.students); // Update students from the API response
       } catch (err) {
         setError((err as Error).message);
       } finally {
@@ -67,12 +64,10 @@ const AdminHome: React.FC = () => {
         }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to update student action");
-      }
+      if (!response.ok) throw new Error("Failed to update student action");
       toast.success(`Student form ${action}ed successfully`);
 
-      // Optionally update UI based on action
+      // Update UI based on action
       setStudents((prevStudents) =>
         prevStudents.map((student) =>
           student._id === studentId
@@ -109,36 +104,116 @@ const AdminHome: React.FC = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-800 min-h-screen">
-      <h1 className="text-3xl font-bold text-center mb-6">Admin Home</h1>
-      <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {students.map((student) => (
-          <div key={student._id} className="border p-4 rounded bg-white shadow">
-            
-            <StudentCard student={student} onClick={handleCardClick} />
-            <div className="flex justify-between mt-4">
-              {student.accepted ? (
-                <span className="text-green-600 font-semibold flex justify-center items-center text-center">Verified</span>
-              ) : (
-                <>
-                  <button
-                    onClick={() => handleAction(student._id, "accept")}
-                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-                  >
-                    Accept
-                  </button>
-                  <button
-                    onClick={() => handleAction(student._id, "reject")}
-                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                  >
-                    Reject
-                  </button>
-                </>
-              )}
-            </div>
+    <div className="p-6 bg-white min-h-screen">
+      <h1 className="text-3xl font-bold text-black text-start ">
+        Dashboard Overview
+      </h1>
+      <p className="text-sm font-thin text-gray-700 text-start mb-5">
+        Manage student applications and fee receipts
+      </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+        <div className="bg-white p-4 rounded shadow">
+          <h2 className="font-semibold text-lg text-black">
+            Total Applications
+          </h2>
+          <p className="text-2xl font-semibold text-blue-600">24</p>
+          <p className="text-gray-800">+3 from yesterday</p>
+        </div>
+        <div className="bg-white p-4 rounded shadow">
+          <h2 className="font-semibold text-lg text-black">Pending Review</h2>
+          <p className="text-2xl font-semibold text-yellow-600">12</p>
+          <p className="text-gray-800">Requires attention</p>
+        </div>
+        <div className="bg-white p-4 rounded shadow">
+          <h2 className="font-semibold text-lg text-black">Processed Today</h2>
+          <p className="text-2xl text-green-600">8</p>
+          <p className="text-gray-800">Applications completed</p>
+        </div>
+      </div>
+
+      <h2 className="text-xl font-semibold text-black mb-4">
+        Recent Applications
+      </h2>
+
+      <div className="border rounded-lg bg-white p-4">
+        <motion.div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+          {/* View All button */}
+          <div
+            onClick={() => setShowAllApplications((prev) => !prev)}
+            className="absolute top-0 right-0 mt-2 mr-2 text-blue-700 bg-white  hover:cursor-pointer hover:underline px-3 py-1 rounded"
+          >
+            {showAllApplications ? "View Less" : "View All"}
           </div>
-        ))}
-      </motion.div>
+
+          {/* Students grid */}
+          {students.slice(0, 3).map((student) => (
+            <div key={student._id} className="border p-4 rounded shadow">
+              <h3 className="font-bold text-black">{student.name}</h3>
+              {/* <p className="text-black">Applied: {student.appliedAgo}</p> */}
+              <p className="text-black">Course: {student.course}</p>
+              <p className="text-black">Contact: {student.email}</p>
+              <div className="flex justify-between mt-4">
+                {student.accepted ? (
+                  <span className="text-green-600 font-semibold">Verified</span>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => handleAction(student._id, "accept")}
+                      className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                    >
+                      Accept
+                    </button>
+                    <button
+                      onClick={() => handleAction(student._id, "reject")}
+                      className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                    >
+                      Reject
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+        {showAllApplications && (
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+            {students.slice(3).map((student) => (
+              <div key={student._id} className="border p-4 rounded shadow">
+                <h3 className="font-bold text-black capitalize ">
+                  {student.name}
+                </h3>
+                {/* <p className="text-black">Applied: {student.appliedAgo}</p> */}
+                <p className="text-black">Course: {student.course}</p>
+                <p className="text-black">Contact: {student.email}</p>
+                <div className="flex justify-between mt-4">
+                  {student.accepted ? (
+                    <span className="text-green-600 font-semibold">
+                      Verified
+                    </span>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => handleAction(student._id, "accept")}
+                        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                      >
+                        Accept
+                      </button>
+                      <button
+                        onClick={() => handleAction(student._id, "reject")}
+                        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                      >
+                        Reject
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </div>
 
       {showModal && selectedStudent && (
         <StudentModal student={selectedStudent} onClose={closeModal} />
