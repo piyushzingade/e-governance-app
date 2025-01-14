@@ -16,7 +16,7 @@ export default async function Page() {
         redirect("/home"); 
         break;
       case "AdmissionAdmin":
-        redirect("/superAdmin"); 
+        redirect("/admin"); 
         break;
       case "SuperAdmin":
         redirect("/superAdmin"); 
