@@ -87,22 +87,7 @@ const Signin = () => {
     }
   };
 
-  // // Handle clicks outside the dropdown
-  // useEffect(() => {
-  //   const handleClickOutside = (event: MouseEvent) => {
-  //     if (
-  //       dropdownRef.current &&
-  //       !dropdownRef.current.contains(event.target as Node)
-  //     ) {
-  //       setSuggestedDomains([]);
-  //     }
-  //   };
 
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
 
   return (
     <section className="wrapper relative flex min-h-screen items-center justify-center overflow-hidden antialiased">

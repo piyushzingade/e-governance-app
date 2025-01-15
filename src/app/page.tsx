@@ -13,17 +13,19 @@ export default async function Page() {
    
     switch (role) {
       case "Student":
-        redirect("/home"); 
+        redirect("/home");
         break;
       case "AdmissionAdmin":
-        redirect("/admin"); 
+        redirect("/admin");
+        break;
+      case "Teacher":
+        redirect("/teacher");
         break;
       case "SuperAdmin":
-        redirect("/superAdmin"); 
+        redirect("/superAdmin");
         break;
       default:
-        
-        redirect("/unauthorized"); 
+        redirect("/unauthorized");
         break;
     }
   } else {

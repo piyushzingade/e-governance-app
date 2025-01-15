@@ -4,6 +4,7 @@ enum Role {
   Student = "Student",
   AdmissionAdmin = "AdmissionAdmin",
   SuperAdmin = "SuperAdmin",
+  Teacher = "Teacher"
 }
 
 export interface UserInterface extends Document {

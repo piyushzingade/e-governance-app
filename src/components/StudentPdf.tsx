@@ -6,6 +6,7 @@ import YourApplicationPage from "@/components/AdmissionCard";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { Input } from "postcss";
 
 
 interface StudentDetails {
@@ -47,6 +48,36 @@ export default function StudentPdf() {
 
     fetchStudentData();
   }, []);
+  const [formData, setFormData] = useState<any>({});
+  const [errors, setErrors] = useState<any>({});
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0] || null;
+  
+      if (file) {
+        const allowedTypes = ["image/doc"];
+  
+        if (!allowedTypes.includes(file.type)) {
+          setErrors({
+            ...errors,
+            marksheet: "Only JPEG, PNG, and JPG files are allowed.",
+          });
+          setFormData({ ...formData, marksheet: null });
+          return;
+        }
+  
+        if (file.size > 10 * 1024 * 1024) {
+          setErrors({
+            ...errors,
+            marksheet: "file size should not exceed than 10 mb.",
+          });
+          setFormData({ ...formData, marksheet: null });
+          return;
+        }
+      }
+  
+      setFormData({ ...formData, marksheet: file });
+      setErrors({ ...errors, marksheet: "" });
+    };
 
   const handleDownloadPDF = () => {
     if (!studentDetails) return;
@@ -107,7 +138,7 @@ export default function StudentPdf() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-900 via-indigo-800 to-purple-900 text-white flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-r from-blue-900 via-indigo-800 to-purple-900 text-white flex flex-col items-center justify-center">
       <div className="w-full max-w-2xl p-4 bg-white shadow-lg rounded-lg transform m-4 transition-transform duration-300">
         <div className="text-center mb-4">
           <h1 className="text-3xl font-extrabold text-gray-800 tracking-tight mb-2">
@@ -118,11 +149,9 @@ export default function StudentPdf() {
           </p>
         </div>
 
-        <div className="border-t border-gray-300 my-3"></div>
-
         {/* Main Application Details Card */}
         <div className="bg-gradient-to-r from-indigo-600 to-purple-700 p-3 rounded-lg shadow-md">
-          <YourApplicationPage  />
+          <YourApplicationPage />
         </div>
 
         {/* Additional Information Section */}
@@ -151,6 +180,8 @@ export default function StudentPdf() {
           </button>
         </div>
       </div>
+
+      
     </div>
   );
 }

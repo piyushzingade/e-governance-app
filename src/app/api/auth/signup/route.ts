@@ -19,11 +19,9 @@ export async function POST(req: Request) {
 
     await connectToDB();
 
-    
-
     const existingUser = await User.findOne( {email });
 
-    if(!existingUser) {
+    if(existingUser) {
       return NextResponse.json({
         error : "User already exists"
       } , {
