@@ -42,7 +42,7 @@ const StudentAppbar = () => {
             "Department",
             "Student",
             "Contact Us",
-            "Practical",
+            
           ].map((item, index) => (
             <div
               key={index}
