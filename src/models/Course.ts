@@ -8,12 +8,7 @@ export interface ICourse extends Document {
   fee : number;
 }
 
-// const CourseSchema: Schema = new Schema({
-//   name: { type: String, required: true },
-//   description: { type: String, required: true },
-//   duration: { type: String, required: true },
-//   fee: { type: Number, required: true },
-// });
+
 
 const CourseSchema  :Schema = new Schema<ICourse> (
   {

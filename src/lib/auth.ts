@@ -5,7 +5,7 @@ import User from "@/models/User";
 import { connectToDB } from "@/db/mongo";
 
 export const authOptions: AuthOptions = {
-  // session: { strategy: "jwt" },
+ 
   session: {
     strategy: "jwt",
   },
@@ -39,7 +39,7 @@ export const authOptions: AuthOptions = {
           throw new Error("Invalid Password");
         }
 
-        const validRoles = ["Student", "AdmissionAdmin", "SuperAdmin" , "Teacher"];
+        const validRoles = ["Student", "Admin"];
         if (!validRoles.includes(user.role)) {
           throw new Error("unauthorized role");
         }

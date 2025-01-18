@@ -2,9 +2,8 @@ import mongoose, { Schema, Document } from "mongoose";
 
 enum Role {
   Student = "Student",
-  AdmissionAdmin = "AdmissionAdmin",
-  SuperAdmin = "SuperAdmin",
-  Teacher = "Teacher"
+  Admin = "Admin",
+
 }
 
 export interface UserInterface extends Document {
