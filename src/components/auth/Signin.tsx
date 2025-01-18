@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import React, { useRef, useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import axios from "axios";
 import Link from "next/link";
 
 const emailDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com"];

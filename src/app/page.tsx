@@ -15,14 +15,8 @@ export default async function Page() {
       case "Student":
         redirect("/home");
         break;
-      case "AdmissionAdmin":
+      case "Admin":
         redirect("/admin");
-        break;
-      case "Teacher":
-        redirect("/teacher");
-        break;
-      case "SuperAdmin":
-        redirect("/superAdmin");
         break;
       default:
         redirect("/unauthorized");

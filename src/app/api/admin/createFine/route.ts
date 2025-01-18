@@ -1,4 +1,4 @@
-//superadmin/createFine
+
 
 import { NextResponse } from "next/server";
 import { connectToDB } from "@/db/mongo";

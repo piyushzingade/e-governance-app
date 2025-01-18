@@ -1,4 +1,4 @@
-//superadmin/createCourse
+
 import { NextResponse } from "next/server";
 import { connectToDB } from "@/db/mongo";
 import Course from "@/models/Course";
