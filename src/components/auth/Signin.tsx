@@ -200,11 +200,12 @@ const Signin = () => {
             </div>
           </div>
           <div className="text-center text-sm text-white">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link className="hover:underline " href="/signup">
               Sign up
             </Link>
           </div>
+
           <Button
             size={"lg"}
             variant={"outline"}
