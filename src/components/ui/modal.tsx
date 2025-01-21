@@ -18,7 +18,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+export const Modal = ({ isOpen, onClose }: ModalProps) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -136,7 +136,6 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         toast.error(data.error || "Failed to submit the form.");
         return;
       }
-
       toast.success(data.message || "Form submitted successfully!");
       router.push("/student");
       onClose();
@@ -145,7 +144,6 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       toast.error("An error occurred. Please try again.");
     }
   };
-
 
   if (!isOpen) return null;
   return (

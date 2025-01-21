@@ -36,3 +36,25 @@ export async function POST(req: Request) {
     );
   }
 }
+
+
+export async function GET() {
+  try {
+    await connectToDB();
+
+    const course =  Course.countDocuments({}).exec();
+
+    return NextResponse.json({
+      course
+    } , {
+      status :201
+    })
+  } catch (error) {
+    console.log(error);
+    NextResponse.json({
+      error  : "Internal server error"
+    } , {
+      status : 402
+    })
+  }
+}

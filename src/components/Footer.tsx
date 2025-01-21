@@ -6,6 +6,7 @@ import {
   faLinkedinIn,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "./ui/button";
 export const Footer = () => {
    return (
      <footer className="bg-[#171717] text-white py-8 border-t border-gray-600 ">
@@ -107,11 +108,14 @@ export const Footer = () => {
                <input
                  type="email"
                  placeholder="Your email address"
-                 className="w-full px-4 py-2 text-sm bg-gray-800 border border-gray-700 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 className="w-full px-4 py-2 text-sm rounded-lg bg-gray-800 border border-gray-700 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                />
-               <button className="px-4 py-2 text-sm font-semibold bg-blue-600 hover:bg-blue-700 rounded-r-md">
+               <Button
+                 variant={"outline"}
+                 className="ml-2 px-4 py-2 text-sm font-semibold bg-blue-600 hover:bg-blue-700 rounded-r-md"
+               >
                  Subscribe
-               </button>
+               </Button>
              </div>
            </div>
          </div>
