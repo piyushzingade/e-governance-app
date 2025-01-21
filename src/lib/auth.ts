@@ -26,7 +26,7 @@ export const authOptions: AuthOptions = {
         const user = await User.findOne({ email: credentials.email });
 
         if (!user) {
-          throw new Error("No user found with the provided email ");
+          throw new Error("No user found with the provided email");
         }
 
         const isValidPassword = await bcrypt.compare(
@@ -40,13 +40,13 @@ export const authOptions: AuthOptions = {
 
         const validRoles = ["Student", "Admin"];
         if (!validRoles.includes(user.role)) {
-          throw new Error("unauthorized role");
+          throw new Error("Unauthorized role");
         }
 
         return {
           id: user._id.toString(),
           email: user.email,
-          usename: user.username || null,
+          username: user.username || null,
           role: user.role,
         };
       },
@@ -65,6 +65,8 @@ export const authOptions: AuthOptions = {
       if (user) {
         token.id = user.id;
         token.email = user.email ?? null;
+        token.username = user.username ?? null;
+        token.role = user.role;
       }
 
       return token;
@@ -74,7 +76,7 @@ export const authOptions: AuthOptions = {
       session.user = {
         id: token.id as string,
         email: token.email ?? null,
-        username: (token.username as string) ?? null, // This should match the variable name
+        username: (token.username as string) ?? null,
         role: token.role as string,
       };
       return session;
