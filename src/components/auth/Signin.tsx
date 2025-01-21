@@ -200,7 +200,7 @@ const Signin = () => {
             </div>
           </div>
           <div className="text-center text-sm text-white">
-            Already have an account?{" "}
+            Don't have an account?{" "}
             <Link className="hover:underline " href="/signup">
               Sign up
             </Link>
@@ -241,6 +241,7 @@ const Signin = () => {
           </Button>
         </div>
       </motion.div>
+      <div className="absolute -bottom-[16rem] -z-[20] size-[24rem] overflow-hidden rounded-full bg-gradient-to-t from-blue-400 to-blue-700 blur-[16em]" />
     </section>
   );
 };
