@@ -4,10 +4,10 @@ import { connectToDB } from "@/db/mongo";
 import Course from "@/models/Course";
 
 export async function POST(req: Request) {
-  const { name, duration, fee } = await req.json();
+  const { name, duration, category ,batchSize,  fee } = await req.json();
   try {
     await connectToDB();
-    if (!name || !duration || !fee) {
+    if (!name || !duration || !category ||!batchSize || !fee) {
       return NextResponse.json(
         {
           error: "Course name , duration and fee are required",
@@ -16,12 +16,13 @@ export async function POST(req: Request) {
       );
     }
 
-    const newCourse = new Course({ name, duration, fee });
+    const newCourse = new Course({ name, duration, category ,batchSize, fee });
     await newCourse.save();
 
     return NextResponse.json(
       {
         message: "Course created successfully",
+        newCourse,
       },
       { status: 201 }
     );

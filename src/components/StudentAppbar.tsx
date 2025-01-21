@@ -29,7 +29,7 @@ const StudentAppbar = () => {
             src="https://flowbite.com/docs/images/logo.svg"
             className="h-6 sm:h-8"
             alt="E-Governance"
-            width={300}
+            width={30}
             height={200}
           />
           <h2 className="hidden sm:block ">E-Governance</h2>

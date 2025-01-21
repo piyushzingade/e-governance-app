@@ -74,7 +74,7 @@ export async function POST(req: Request) {
 
     await Wallet.create({
       studentId: studentForm._id,
-      balance: 500,
+      balance: 0,
     });
 
     return NextResponse.json(

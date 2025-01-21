@@ -105,16 +105,7 @@ const Signin = () => {
         <div className="flex flex-col gap-8">
           <div className="grid w-full items-center gap-4">
             <div className="relative flex flex-col gap-2">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                className="focus:ring-none border-none bg-primary/5 focus:outline-none"
-                name="username"
-                id="username"
-                placeholder="Your username"
-                onChange={(e) => {
-                  username.current = e.target.value;
-                }}
-              />
+              
               <Label htmlFor="email">Email</Label>
               <Input
                 className="focus:ring-none border-none bg-primary/5 focus:outline-none"
