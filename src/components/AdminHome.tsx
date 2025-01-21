@@ -48,7 +48,7 @@ const AdminHome: React.FC = () => {
     const fetchStudents = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3000/api/admin/studentForms"
+          "/api/admin/studentForms"
         );
         if (!response.ok) throw new Error("Failed to fetch students");
 
@@ -70,7 +70,7 @@ const AdminHome: React.FC = () => {
   ) => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/students/verify",
+        "/api/students/verify",
         {
           method: "POST",
           headers: {
