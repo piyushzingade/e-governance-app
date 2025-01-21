@@ -65,10 +65,6 @@ export const authOptions: AuthOptions = {
       if (user) {
         token.id = user.id;
         token.email = user.email ?? null;
-        // @ts-expect-error
-        token.username = user.username ?? null;
-        // @ts-expect-error
-        token.role = user.role;
       }
 
       return token;

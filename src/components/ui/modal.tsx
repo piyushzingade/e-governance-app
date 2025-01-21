@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { Input } from "./input";
 import { useRouter } from "next/navigation";
 import { Label } from "@radix-ui/react-label";
-import { error } from "console";
+
 
 // interface ModalProps {
 //   isOpen: boolean;

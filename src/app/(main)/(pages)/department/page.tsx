@@ -47,7 +47,7 @@ export default function Department() {
           </h2>
           <p className="text-gray-400 mb-6">
             For any queries about our departments, feel free to reach out to us
-            via email or phone. We're happy to assist you.
+            via email or phone. We&apos;re happy to assist you.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-6 bg-gray-800 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transform transition-all">
