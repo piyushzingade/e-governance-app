@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -12,7 +13,7 @@ const ApplicationCard = ({
 }) => {
   return (
     <div className="bg-white text-black border-2 border-gray-300 font-bold shadow-lg rounded-lg p-6 flex gap-6 items-start">
-      <img
+      <Image
         src={`https://avatar.iran.liara.run/public/boy?username=${application.user}`}
         alt="Student"
         className="w-32 h-32 rounded-full object-cover border-4 border-gray-700"

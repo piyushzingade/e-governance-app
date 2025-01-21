@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Account from "./Account";
+import Image from "next/image";
 
 const StudentAppbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +25,7 @@ const StudentAppbar = () => {
           className="text-xl sm:text-2xl font-bold flex items-center gap-2 cursor-pointer text-blue-500"
           onClick={() => routerHandler("/")}
         >
-          <img
+          <Image
             src="https://flowbite.com/docs/images/logo.svg"
             className="h-6 sm:h-8"
             alt="E-Governance"

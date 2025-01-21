@@ -6,7 +6,7 @@ import YourApplicationPage from "@/components/AdmissionCard";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { Input } from "postcss";
+
 
 
 interface StudentDetails {
@@ -50,34 +50,34 @@ export default function StudentPdf() {
   }, []);
   const [formData, setFormData] = useState<any>({});
   const [errors, setErrors] = useState<any>({});
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0] || null;
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //     const file = e.target.files?.[0] || null;
   
-      if (file) {
-        const allowedTypes = ["image/doc"];
+  //     if (file) {
+  //       const allowedTypes = ["image/doc"];
   
-        if (!allowedTypes.includes(file.type)) {
-          setErrors({
-            ...errors,
-            marksheet: "Only JPEG, PNG, and JPG files are allowed.",
-          });
-          setFormData({ ...formData, marksheet: null });
-          return;
-        }
+  //       if (!allowedTypes.includes(file.type)) {
+  //         setErrors({
+  //           ...errors,
+  //           marksheet: "Only JPEG, PNG, and JPG files are allowed.",
+  //         });
+  //         setFormData({ ...formData, marksheet: null });
+  //         return;
+  //       }
   
-        if (file.size > 10 * 1024 * 1024) {
-          setErrors({
-            ...errors,
-            marksheet: "file size should not exceed than 10 mb.",
-          });
-          setFormData({ ...formData, marksheet: null });
-          return;
-        }
-      }
+  //       if (file.size > 10 * 1024 * 1024) {
+  //         setErrors({
+  //           ...errors,
+  //           marksheet: "file size should not exceed than 10 mb.",
+  //         });
+  //         setFormData({ ...formData, marksheet: null });
+  //         return;
+  //       }
+  //     }
   
-      setFormData({ ...formData, marksheet: file });
-      setErrors({ ...errors, marksheet: "" });
-    };
+  //     setFormData({ ...formData, marksheet: file });
+  //     setErrors({ ...errors, marksheet: "" });
+  //   };
 
   const handleDownloadPDF = () => {
     if (!studentDetails) return;

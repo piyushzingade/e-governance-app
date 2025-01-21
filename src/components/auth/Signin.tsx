@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -13,7 +13,6 @@ const emailDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com"];
 
 const Signin = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [checkingPassword, setCheckingPassword] = useState(false);
   const [requiredError, setRequiredError] = useState({
     emailReq: false,
     passReq: false,
@@ -22,9 +21,7 @@ const Signin = () => {
   const [suggestedDomains, setSuggestedDomains] =
     useState<string[]>(emailDomains);
   const [error, setError] = useState("");
-  const [focusedIndex, setFocusedIndex] = useState(-1);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const dropdownRef = useRef<HTMLUListElement>(null);
 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState: any) => !prevState);

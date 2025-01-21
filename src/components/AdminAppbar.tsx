@@ -17,6 +17,7 @@ const AdminAppbar = () => {
       });
       toast.success("Logged out successfully");
     } catch (error) {
+      console.log(error)
       toast.error("Failed to log out. Please try again.");
     }
   };

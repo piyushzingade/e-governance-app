@@ -4,7 +4,7 @@ import React from "react";
 
 import { X } from "lucide-react";
 import { Button } from "./ui/button";
-import toast from "react-hot-toast";
+
 
 interface Student {
   userId: string;
@@ -30,12 +30,12 @@ export const StudentModal: React.FC<StudentModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="relative w-full max-w-lg bg-white rounded-lg shadow-lg p-6">
-        <button
+        <Button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-400 hover:text-black focus:outline-none"
         >
           <X className="h-6 w-6" />
-        </button>
+        </Button>
         <h2 className="text-2xl font-bld mb-4 text-black">Student Details</h2>
         <div className="space-y-4 text-black">
           <p>

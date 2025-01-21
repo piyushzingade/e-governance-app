@@ -20,15 +20,15 @@ import {
 } from "react-icons/fa";
 
 
-const MotionCard = ({ icon, title }: { icon?: string; title: string }) => (
-  <motion.div
-    whileHover={{ scale: 1.05 }}
-    className="bg-gradient-to-b from-blue-50 to-blue-100 p-6 rounded-xl shadow-lg text-center border border-blue-200 hover:border-blue-400 transition-all"
-  >
-    {icon && <div className="text-5xl mb-4">{icon}</div>}
-    <p className="font-medium text-gray-700">{title}</p>
-  </motion.div>
-);
+// const MotionCard = ({ icon, title }: { icon?: string; title: string }) => (
+//   <motion.div
+//     whileHover={{ scale: 1.05 }}
+//     className="bg-gradient-to-b from-blue-50 to-blue-100 p-6 rounded-xl shadow-lg text-center border border-blue-200 hover:border-blue-400 transition-all"
+//   >
+//     {icon && <div className="text-5xl mb-4">{icon}</div>}
+//     <p className="font-medium text-gray-700">{title}</p>
+//   </motion.div>
+// );
 
 
 const facilities = [
