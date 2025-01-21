@@ -4,11 +4,26 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
+// Define the application type
+interface Application {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  dob: string;
+  gender: string;
+  course: string;
+  admitted: boolean;
+  accepted: boolean;
+  rollNo?: string;
+  user: string;
+}
+
 const ApplicationCard = ({
   application,
   onPayFee,
 }: {
-  application: any;
+  application: Application;
   onPayFee: () => void;
 }) => {
   return (
@@ -17,6 +32,8 @@ const ApplicationCard = ({
         src={`https://avatar.iran.liara.run/public/boy?username=${application.user}`}
         alt="Student"
         className="w-32 h-32 rounded-full object-cover border-4 border-gray-700"
+        width={300}
+        height={200}
       />
       <div className="flex flex-col justify-between flex-grow">
         <h2 className="text-2xl text-black font-semibold mb-2">
@@ -54,11 +71,10 @@ const ApplicationCard = ({
   );
 };
 
-
 const YourApplicationPage = () => {
-  const [application, setApplication] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [application, setApplication] = useState<Application | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const fetchStudentData = async () => {
@@ -69,8 +85,8 @@ const YourApplicationPage = () => {
           setError(errorData.error || "Failed to fetch data");
           return;
         }
-        const data = await response.json();
-        setApplication(data || {});
+        const data: Application = await response.json();
+        setApplication(data);
       } catch (err) {
         setError("An error occurred while fetching data");
         console.error(err);
@@ -83,6 +99,7 @@ const YourApplicationPage = () => {
   }, []);
 
   const handlePayFee = async () => {
+    if (!application) return;
     try {
       const response = await fetch("/api/students/payfee", {
         method: "POST",
@@ -96,7 +113,7 @@ const YourApplicationPage = () => {
         return;
       }
 
-      const updatedApplication = await response.json();
+      const updatedApplication: Application = await response.json();
       setApplication(updatedApplication);
       toast.success("Fee Successfully Paid");
     } catch (err) {
@@ -116,7 +133,9 @@ const YourApplicationPage = () => {
   return (
     <div className="h-96 text-white py-10 px-4">
       <div className="max-w-4xl mx-auto p-">
-        <ApplicationCard application={application} onPayFee={handlePayFee} />
+        {application && (
+          <ApplicationCard application={application} onPayFee={handlePayFee} />
+        )}
       </div>
     </div>
   );

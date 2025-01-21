@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Academics() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
@@ -20,10 +22,12 @@ export default function Academics() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-4 bg-gray-800 rounded-lg shadow-md hover:scale-105 transform transition-all duration-300">
-              <img
+              <Image
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-vQ5EeNvTWXeTZkMetT9TtO-VXZR9Ke8rpg&s"
                 alt="Information Technology"
                 className="rounded-md mb-4"
+                width={300} // specify the width
+                height={200} // specify the height
               />
 
               <h3 className="text-xl font-bold">Informarion Technology</h3>
@@ -33,10 +37,12 @@ export default function Academics() {
               </p>
             </div>
             <div className="p-4 bg-gray-800 rounded-lg shadow-md hover:scale-105 transform transition-all duration-300">
-              <img
+              <Image
                 src="https://thumbs.dreamstime.com/b/line-web-concept-computer-science-vector-banner-education-open-path-76284593.jpg"
                 alt="Computer Science"
                 className="rounded-md mb-4"
+                width={300} // specify the width
+                height={200} // specify the height
               />
 
               <h3 className="text-xl font-bold "> Computer Science</h3>
@@ -47,10 +53,12 @@ export default function Academics() {
             </div>
 
             <div className="p-4 bg-gray-800 rounded-lg shadow-md hover:scale-105 transform transition-all duration-300">
-              <img
+              <Image
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2RzGeikAnS5cPgbYPavFrQmzbb6FVoTjWPw&s"
                 alt="Data Science"
                 className="rounded-md mb-4"
+                width={300} // specify the width
+                height={200} // specify the height
               />
               <h3 className="text-xl font-bold">Data Science</h3>
               <p className="mt-2 text-sm text-gray-400">
@@ -98,10 +106,12 @@ export default function Academics() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-4 bg-gray-800 rounded-lg shadow-md hover:scale-105 transform transition-all duration-300">
-              <img
+              <Image
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAu_fqmpeZICRYcwUXP3evuWeuTNXCFnQiLA&s"
                 alt="Library"
                 className="rounded-md mb-4"
+                width={300}
+                height={200}
               />
               <h3 className="text-xl font-bold">Library</h3>
               <p className="mt-2 text-sm text-gray-400">
@@ -112,10 +122,12 @@ export default function Academics() {
             </div>
             {/* <div className="p-4 bg-gray-800 rounded-lg shadow-md hover:scale-105 transform transition-all duration-300 "> */}
             <div className="p-4 bg-gray-800 rounded-lg shadow-md hover:scale-105 transform transition-all duration-300">
-              <img
+              <Image
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOQt1okTlMih-v1T_HToTOSYXsPO3bj833Hw&s"
                 alt="Research Labs"
                 className="rounded-md mb-4 "
+                width={300}
+                height={200}
               />
               <h3 className="text-xl font-bold">Research Labs</h3>
               <p className="mt-2 text-sm text-gray-400">

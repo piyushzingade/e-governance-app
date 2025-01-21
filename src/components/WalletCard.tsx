@@ -25,10 +25,14 @@ const WalletCard = () => {
         return;
       }
       const data = await response.json();
-      console.log("Fetched Balance Data :", data);
+      console.log("Fetched Balance Data:", data);
       setBalance(data.balance);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   };
 
@@ -41,10 +45,14 @@ const WalletCard = () => {
         return;
       }
       const data = await response.json();
-      console.log("Fetched Transactions Data :", data);
+      console.log("Fetched Transactions Data:", data);
       setTransactions(data.transactions || []);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     }
   };
 
@@ -59,15 +67,18 @@ const WalletCard = () => {
   }, []);
 
   if (loading) {
-      return <div className="flex items-center justify-center min-h-screen bg-[#111827]">
-                <AiOutlineLoading3Quarters className="text-4xl text-blue-700 animate-spin"/>
-                <span className="ml-4 text-lg text-gray-600">Loading Please Wait.....</span>
-            </div>
-    }
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#111827]">
+        <AiOutlineLoading3Quarters className="text-4xl text-blue-700 animate-spin" />
+        <span className="ml-4 text-lg text-gray-600">
+          Loading Please Wait.....
+        </span>
+      </div>
+    );
+  }
 
   if (error) {
     return <div className="text-red-500 text-center">{error}</div>;
-    
   }
 
   return (

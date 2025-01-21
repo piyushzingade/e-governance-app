@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { FaSignOutAlt, FaWallet, FaFileAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 
 const Account = () => {
 
@@ -57,10 +58,12 @@ const Account = () => {
                    w-8 h-8 sm:w-10 sm:h-10 "
         onClick={menuToggle}
       >
-        <img
+        <Image
           src="https://avatar.iran.liara.run/public/boy?username=${user}"
           alt="Profile"
           className="w-full h-full object-cover"
+          width={300}
+          height={200}
         />
       </div>
 

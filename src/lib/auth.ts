@@ -5,7 +5,6 @@ import User from "@/models/User";
 import { connectToDB } from "@/db/mongo";
 
 export const authOptions: AuthOptions = {
- 
   session: {
     strategy: "jwt",
   },
@@ -66,9 +65,9 @@ export const authOptions: AuthOptions = {
       if (user) {
         token.id = user.id;
         token.email = user.email ?? null;
-        //@ts-ignore
+        // @ts-expect-error
         token.username = user.username ?? null;
-        //@ts-ignore
+        // @ts-expect-error
         token.role = user.role;
       }
 
@@ -79,7 +78,7 @@ export const authOptions: AuthOptions = {
       session.user = {
         id: token.id as string,
         email: token.email ?? null,
-        username: (token.usename as string) ?? null,
+        username: (token.username as string) ?? null, // This should match the variable name
         role: token.role as string,
       };
       return session;

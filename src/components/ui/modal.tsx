@@ -112,7 +112,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   //   return valid;
   // };
 
-  const handleSubmission = async (event: any) => {
+  const handleSubmission = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { name, email, phone, dob, gender, course } = formData;
 
@@ -121,12 +121,12 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: name,
-          email: email,
-          phone: phone,
-          dob: dob,
-          gender: gender,
-          course: course,
+          name,
+          email,
+          phone,
+          dob,
+          gender,
+          course,
         }),
       });
 
@@ -140,11 +140,12 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       toast.success(data.message || "Form submitted successfully!");
       router.push("/student");
       onClose();
-    } catch (error) {
-      console.error("Error during form submission:", error);
+    } catch (err) {
+      console.error("Error during form submission:", err);
       toast.error("An error occurred. Please try again.");
     }
   };
+
 
   if (!isOpen) return null;
   return (

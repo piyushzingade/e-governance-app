@@ -7,8 +7,6 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-
-
 interface StudentDetails {
   name: string;
   email: string;
@@ -27,6 +25,7 @@ export default function StudentPdf() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const router = useRouter();
+
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
@@ -36,8 +35,8 @@ export default function StudentPdf() {
           setError(errorData.error || "Failed to fetch data");
           return;
         }
-        const data = await response.json();
-        setStudentDetails(data || {});
+        const data: StudentDetails = await response.json();
+        setStudentDetails(data);
       } catch (err) {
         setError("An error occurred while fetching data");
         console.error(err);
@@ -48,36 +47,6 @@ export default function StudentPdf() {
 
     fetchStudentData();
   }, []);
-  const [formData, setFormData] = useState<any>({});
-  const [errors, setErrors] = useState<any>({});
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     const file = e.target.files?.[0] || null;
-  
-  //     if (file) {
-  //       const allowedTypes = ["image/doc"];
-  
-  //       if (!allowedTypes.includes(file.type)) {
-  //         setErrors({
-  //           ...errors,
-  //           marksheet: "Only JPEG, PNG, and JPG files are allowed.",
-  //         });
-  //         setFormData({ ...formData, marksheet: null });
-  //         return;
-  //       }
-  
-  //       if (file.size > 10 * 1024 * 1024) {
-  //         setErrors({
-  //           ...errors,
-  //           marksheet: "file size should not exceed than 10 mb.",
-  //         });
-  //         setFormData({ ...formData, marksheet: null });
-  //         return;
-  //       }
-  //     }
-  
-  //     setFormData({ ...formData, marksheet: file });
-  //     setErrors({ ...errors, marksheet: "" });
-  //   };
 
   const handleDownloadPDF = () => {
     if (!studentDetails) return;
@@ -113,17 +82,21 @@ export default function StudentPdf() {
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen bg-[#111827]">
-            <AiOutlineLoading3Quarters className="text-4xl text-blue-700 animate-spin"/>
-            <span className="ml-4 text-lg text-gray-600">Loading Please Wait.....</span>
-          </div>
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#111827]">
+        <AiOutlineLoading3Quarters className="text-4xl text-blue-700 animate-spin" />
+        <span className="ml-4 text-lg text-gray-600">
+          Loading Please Wait.....
+        </span>
+      </div>
+    );
   }
 
   if (error) {
     return (
-      <div className=" text-center  items-center justify-center h-full p-80 bg-[#100c14]">
+      <div className="text-center items-center justify-center h-full p-80 bg-[#100c14]">
         <p className="text-red-500 text-2xl font-semibold mb-4">
-          Student have not filled the admission form
+          Student has not filled the admission form
         </p>
         <motion.button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -180,8 +153,6 @@ export default function StudentPdf() {
           </button>
         </div>
       </div>
-
-      
     </div>
   );
 }

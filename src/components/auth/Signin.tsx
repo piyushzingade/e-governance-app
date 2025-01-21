@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,14 +19,12 @@ const Signin = () => {
     passReq: false,
   });
   const [loading, setLoading] = useState(false);
-  const [suggestedDomains, setSuggestedDomains] =
-    useState<string[]>(emailDomains);
-  const [error, setError] = useState("");
   const passwordRef = useRef<HTMLInputElement>(null);
 
   function togglePasswordVisibility() {
-    setIsPasswordVisible((prevState: any) => !prevState);
+    setIsPasswordVisible((prevState: boolean) => !prevState);
   }
+
   const router = useRouter();
   const email = useRef("");
   const username = useRef("");
@@ -41,15 +40,11 @@ const Signin = () => {
     }));
 
     if (!value.includes("@")) {
-      setSuggestedDomains(emailDomains);
       return;
     }
 
     const [, currentDomain] = value.split("@");
-    const matchingDomains = emailDomains.filter((domain) =>
-      domain.startsWith(currentDomain)
-    );
-    setSuggestedDomains(matchingDomains);
+    emailDomains.filter((domain) => domain.startsWith(currentDomain));
   };
 
   const handleSubmit = async () => {
@@ -82,8 +77,6 @@ const Signin = () => {
       setLoading(false);
     }
   };
-
-
 
   return (
     <section className="wrapper relative flex min-h-screen items-center justify-center overflow-hidden antialiased">
@@ -238,17 +231,16 @@ const Signin = () => {
                   <path
                     className="opacity-75"
                     fill="currentColor"
-                    d="M4 12a8 8 0 018-8v8H4z"
+                    d="M4 12a8 8 0 0116 0H4z"
                   ></path>
                 </svg>
-                <span>Processing...</span>
+                Signing in...
               </>
             )}
-            {!loading && <span>Login</span>}
+            {!loading && "Log in"}
           </Button>
         </div>
       </motion.div>
-      <div className="absolute -bottom-[16rem] -z-[20] size-[24rem] overflow-hidden rounded-full bg-gradient-to-t from-blue-400 to-blue-700 blur-[16em]" />
     </section>
   );
 };
