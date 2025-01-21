@@ -19,7 +19,7 @@ interface StudentCardProps {
   onClick: (student: Student) => void;
 }
 
-const StudentCard: React.FC<StudentCardProps> = ({ student, onClick }) => {
+const StudentCard = ({ student, onClick }: StudentCardProps) => {
   return (
     <div
       className="bg-white p-4 border border-black m-3 rounded-lg shadow-md hover:shadow-lg cursor-pointer"

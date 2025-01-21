@@ -8,11 +8,6 @@ import { useRouter } from "next/navigation";
 import { Label } from "@radix-ui/react-label";
 
 
-// interface ModalProps {
-//   isOpen: boolean;
-//   onClose: () => void;
-// }
-
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
