@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
 import toast from "react-hot-toast";
-import motion from "framer-motion"
+
 interface applicationDetailProps {
   title : string,
   count : number,
