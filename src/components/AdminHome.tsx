@@ -42,9 +42,9 @@ const applicationDetail  : applicationDetailProps[]= [
 const AdminHome = () => {
 
   const [students , setStudents ] = useState<Student[]>([]);
-  const [loading , setloading ]  = useState();
+  // const [loading , setloading ]  = useState();
   const [showAllApplications , setShowAllApplications ] = useState(true);
-  const [ error  , setError] = useState("")
+  // const [ error  , setError] = useState("")
 
   async function handleAction(studentId: string, action: "accept" | "reject") {
     try {
@@ -62,8 +62,9 @@ const AdminHome = () => {
             : student
         )
       );
-    } catch (err) {
-      setError((err as Error).message);
+    } catch (error) {
+      console.log("Error"  + error)
+      // setError((err as Error).message);
     }
   };
   
@@ -77,6 +78,7 @@ const AdminHome = () => {
       }
       setStudents(response.data.students);
     } catch (error) {
+      
       console.error("Error in fetching All Student data:", error);
     }
   }
