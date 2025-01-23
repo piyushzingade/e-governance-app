@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios"
-import { NextResponse } from "next/server";
-
+import toast from "react-hot-toast";
+import motion from "framer-motion"
 interface applicationDetailProps {
   title : string,
   count : number,
@@ -43,7 +43,30 @@ const AdminHome = () => {
 
   const [students , setStudents ] = useState<Student[]>([]);
   const [loading , setloading ]  = useState();
-  const [allApplication , setAllApplication ] = useState(true);
+  const [showAllApplications , setShowAllApplications ] = useState(true);
+  const [ error  , setError] = useState("")
+
+  async function handleAction(studentId: string, action: "accept" | "reject") {
+    try {
+      const response = await axios.post(
+        "/api/students/verify",{
+          body: JSON.stringify({ studentId, action }),
+        }
+      );
+      if (!response) throw new Error("Failed to update student action");
+      toast.success(`Student form ${action}ed successfully`);
+    setStudents((prevStudents) =>
+        prevStudents.map((student) =>
+          student._id === studentId
+            ? { ...student, accepted: action === "accept" }
+            : student
+        )
+      );
+    } catch (err) {
+      setError((err as Error).message);
+    }
+  };
+  
 
   async function showStudent() {
     try {
@@ -92,20 +115,82 @@ const AdminHome = () => {
       <div className="border border-zinc-300 rounded-xl h-72 mx-4">
         <div className="p-4 flex  items-center  justify-between">
           <h2 className="text-2xl font-medium ">Recent Application</h2>
-          <h2 className="text-blue-400 font-light text-light hover:underline ">
-            {allApplication ? " View all " : "View less"}
-          </h2>
+          <div
+            onClick={() => setShowAllApplications((prev) => !prev)}
+            className="text-blue-400 font-light text-light hover:cursor-pointer hover:underline "
+          >
+            {showAllApplications ? " View all " : "View less"}
+          </div>
         </div>
         <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-          {students.map((student) => (
-            <div className="">
-              <h2>{student.name}</h2>
-              <h2>{student.email}</h2>
-              <h2>{student.course}</h2>
-              {/* <h2>{student.name}</h2>
-              <h2>{student.name}</h2> */}
+          {students.slice(0, 3).map((student) => (
+            <div
+              key={student._id}
+              className="grid grid-cols-1 border shadow border-gray-200 p-3 rounded-xl"
+            >
+              <h2 className="text-lg font-medium capitalize">
+                Name : {student.name}
+              </h2>
+              <h2 className="text-md font-normal">Email : {student.email}</h2>
+              <h2 className="text-md font-normal">Course : {student.course}</h2>
+
+              {student.accepted ? (
+                <span className="text-green-600 font-semibold">Verified</span>
+              ) : (
+                <>
+                  <button
+                    onClick={() => handleAction(student._id, "accept")}
+                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    onClick={() => handleAction(student._id, "reject")}
+                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                  >
+                    Reject
+                  </button>
+                </>
+              )}
             </div>
           ))}
+
+          {showAllApplications && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+              {students.slice(3).map((student) => (
+                <div key={student._id} className="border p-4 rounded shadow">
+                  <h3 className="font-bold text-black capitalize ">
+                    {student.name}
+                  </h3>
+                  {/* <p className="text-black">Applied: {student.appliedAgo}</p> */}
+                  <p className="text-black">Course: {student.course}</p>
+                  <p className="text-black">Contact: {student.email}</p>
+                  <div className="flex justify-between mt-4">
+                    {student.accepted ? (
+                      <span className="text-green-600 font-semibold">
+                        Verified
+                      </span>
+                    ) : (
+                      <>
+                        <button
+                          onClick={() => handleAction(student._id, "accept")}
+                          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                        >
+                          Accept
+                        </button>
+                        <button
+                          onClick={() => handleAction(student._id, "reject")}
+                          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                        >
+                          Reject
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
