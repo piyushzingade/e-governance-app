@@ -112,6 +112,7 @@ const AdminHome = () => {
           </div>
         ))}
       </div>
+      
 
       {/* All Student Application */}
       <div className="border border-zinc-300 rounded-xl h-72 mx-4">

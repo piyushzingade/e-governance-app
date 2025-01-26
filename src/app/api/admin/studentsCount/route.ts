@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     await connectToDB();
-    const studentCount = await Student.countDocuments({}).exec();
+    const studentCount = await Student.countDocuments({});
 
     return NextResponse.json({ studentCount }, { status: 201 });
   } catch (error) {
