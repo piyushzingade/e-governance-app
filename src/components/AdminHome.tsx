@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import toast from "react-hot-toast";
 
 interface applicationDetailProps {
-  title : string,
-  count : number,
-  description :string
+  title: string;
+  count: number;
+  description: string;
 }
 
 interface Student {
-  _id : string,
-  userId : string,
-  name : string ,
-  email : string,
-  course : string,
-  admitted? : boolean,
-  accepted? : boolean
+  _id: string;
+  userId: string;
+  name: string;
+  email: string;
+  course: string;
+  admitted?: boolean;
+  accepted?: boolean;
 }
 
-const applicationDetail  : applicationDetailProps[]= [
+const applicationDetail: applicationDetailProps[] = [
   {
     title: "Total Application",
     count: 24,
@@ -38,24 +38,20 @@ const applicationDetail  : applicationDetailProps[]= [
   },
 ];
 
-
 const AdminHome = () => {
-
-  const [students , setStudents ] = useState<Student[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
   // const [loading , setloading ]  = useState();
-  const [showAllApplications , setShowAllApplications ] = useState(true);
+  const [showAllApplications, setShowAllApplications] = useState(true);
   // const [ error  , setError] = useState("")
 
   async function handleAction(studentId: string, action: "accept" | "reject") {
     try {
-      const response = await axios.post(
-        "/api/students/verify",{
-          body: JSON.stringify({ studentId, action }),
-        }
-      );
+      const response = await axios.post("/api/students/verify", {
+        body: JSON.stringify({ studentId, action }),
+      });
       if (!response) throw new Error("Failed to update student action");
       toast.success(`Student form ${action}ed successfully`);
-    setStudents((prevStudents) =>
+      setStudents((prevStudents) =>
         prevStudents.map((student) =>
           student._id === studentId
             ? { ...student, accepted: action === "accept" }
@@ -63,11 +59,10 @@ const AdminHome = () => {
         )
       );
     } catch (error) {
-      console.log("Error"  + error)
+      console.log("Error" + error);
       // setError((err as Error).message);
     }
-  };
-  
+  }
 
   async function showStudent() {
     try {
@@ -78,17 +73,16 @@ const AdminHome = () => {
       }
       setStudents(response.data.students);
     } catch (error) {
-      
       console.error("Error in fetching All Student data:", error);
     }
   }
-  useEffect( ()=> {
+  useEffect(() => {
     try {
-      showStudent()
+      showStudent();
     } catch (error) {
-      console.log("Error in useEffect "  + error)
+      console.log("Error in useEffect " + error);
     }
-  } , [])
+  }, []);
 
   return (
     <div className="bg-white text-black  h-full">
@@ -112,7 +106,6 @@ const AdminHome = () => {
           </div>
         ))}
       </div>
-      
 
       {/* All Student Application */}
       <div className="border border-zinc-300 rounded-xl h-72 mx-4">
@@ -198,6 +191,6 @@ const AdminHome = () => {
       </div>
     </div>
   );
-}
+};
 
 export default AdminHome;
