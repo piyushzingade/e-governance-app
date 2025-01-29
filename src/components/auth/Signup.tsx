@@ -22,7 +22,7 @@ const Signup = () => {
   const passwordRef = useRef<string>("");
   const usernameRef = useRef<string>("");
 
-  const router = useRouter(); // For redirection
+  const router = useRouter(); 
 
   const handleSubmit = async (e?: React.FormEvent<HTMLButtonElement>) => {
     e?.preventDefault();
@@ -39,7 +39,7 @@ const Signup = () => {
     }
 
     try {
-      setLoading(true); // Show spinner
+      setLoading(true); 
       toast.loading("Signing up...");
 
       const response = await fetch(`/api/auth/signup`, {
@@ -58,7 +58,7 @@ const Signup = () => {
         toast.dismiss();
         toast.success("Signup successful! Redirecting...");
         setTimeout(() => {
-          router.push("/home"); // Redirect to home page
+          router.push("/home"); 
         }, 1500);
       } else {
         const errorData = await response.json();
@@ -70,7 +70,7 @@ const Signup = () => {
       toast.dismiss();
       toast.error("An error occurred. Please try again later.");
     } finally {
-      setLoading(false); // Hide spinner
+      setLoading(false); 
     }
   };
 
